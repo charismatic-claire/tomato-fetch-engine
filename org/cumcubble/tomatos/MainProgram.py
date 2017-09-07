@@ -1,40 +1,39 @@
-from org.cumcubble.tomatos.TomatosFromURL import TomatosFromURL
-import json
-import pprint
+from org.cumcubble.tomatos.TomatoJSON import TomatoJSON
+from elasticsearch.client import Elasticsearch
+from org.cumcubble.tomatos.TomatoPrinter import TomatoPrinter
 
-def fetchFromWeb():
-    ## generate list of tomatos
-    tfu = TomatosFromURL()
-    tomatos = tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-a-d' )
-    tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-e-h' ) )
-    tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-i-l' ) )
-    tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-m-p' ) )
-    tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-q-u' ) )
-    tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-v-z' ) )
-
-    ## list to dict
-    tomatoList = []
-    for tomato in tomatos:
-        tomatoList.append( tomato.toDictionary() )
-    tomatoDict = {}
-    tomatoDict['tomatos'] = tomatoList
-
-    ## export to json file
-    with open( 'tomatos.json', mode='w', encoding='utf-8' ) as tomatoFile:
-        json.dump( tomatoDict, tomatoFile, indent=2 )
-
-def loadFromFile():
-    with open( 'tomatos.json', mode='r', encoding='utf-8' ) as tomatoFile:
-        tomatoDict = json.load( tomatoFile )
-    return tomatoDict
-
-
-## main program
 if __name__ == '__main__':
-    ## fetch from web
-    #fetchFromWeb()
 
-    ## load and print
-    tomatoDict = loadFromFile()
-    pp= pprint.PrettyPrinter( indent=1, compact=True )
-    pp.pprint( tomatoDict )
+    ## init
+    io = TomatoJSON( 'tomatos_enriched.json' )
+    es = Elasticsearch()
+    tp = TomatoPrinter()
+         
+    ## load data
+    tomatoList = io.fromFileToList()
+    
+    ## import to elasticsearch
+    #es.indices.delete( index='tomatos' )
+    #tomatoId = 1
+    #for tomato in tomatoList:
+    #    result = es.index( index='tomatos' , doc_type='profiles', id=tomatoId, body=tomato )
+    #    tomatoId += 1
+    #    print( result )
+    
+    ## find all tags
+    tags = set()
+    for tomato in tomatoList:
+        try:
+            for tag in tomato['tags']:
+                tags.add( tag )
+        except:
+            pass
+         
+    ## query elasticsearch
+    for tag in tags:
+        query = '{ "query":  { "match": { "tags": "' + tag + '" } } }'
+        response = es.search( index='tomatos', doc_type='profiles', body=query, size=5 )
+        result = response['hits']
+        print( '-------- ' + tag + ' --------')
+        tp.print( result )
+         
