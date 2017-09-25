@@ -3,21 +3,29 @@ import json
 
 class TomatoJSON(object):
 
-    def __init__( self, file ):
-        self.file = file
-        
     def setFile(self, file ):
         self.file = file
         
-    def fromWebToFile( self ):
+    def fromWebToFile( self, isExtended ):
         ## generate list of tomatos
         tfu = TomatosFromURL()
         tomatos = tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-a-d' )
-        tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-e-h' ) )
-        tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-i-l' ) )
-        tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-m-p' ) )
-        tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-q-u' ) )
-        tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-v-z' ) )
+        if isExtended:
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-a-d?start=30' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-a-d?start=60' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-a-d?start=90' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-e-h' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-e-h?start=30' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-e-h?start=60' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-i-l' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-i-l?start=30' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-m-p' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-m-p?start=30' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-m-p?start=60' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-q-u' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-q-u?start=30' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-q-u?start=60' ) )
+            tomatos.extend( tfu.generateTomatos( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomatensorten-v-z' ) )
     
         ## list to dict
         tomatoList = []

@@ -15,11 +15,15 @@ class TomatoEnricher(object):
         return tomato
     
     def addColors( self, tomato ):
-        query_colors = [ 'rot', 'gelb', 'orange', 'rosa', 'grün', 'lila', 'violett', 'weiß', 'braun' ]
+        query_colors = [ 'rot', 'gelb', 'orange', 'rosa', 'grün', 'lila', 'creme'
+            'violett', 'weiß', 'braun', 'blau', 'schwarz', 'purpur', 'gold', 'bronze' ]
         found_colors = []
         for color in query_colors:
-            if re.search( '\w*' + color + '\w*' , ( str( tomato['name'] ) + ' ' + str( tomato['description'] ) ).lower() ):
+            if re.search( '.*' + color + '.*' , ( str( tomato['name'] ) + ' ' + str( tomato['description'] ) ).lower() ):
                 found_colors.append( color )
+        if re.search( '.*ocker*.', ( str( tomato['name'] ) + ' ' + str( tomato['description'] ) ).lower() ):
+            if not re.search( '.*locker*.', ( str( tomato['name'] ) + ' ' + str( tomato['description'] ) ).lower() ):
+                found_colors.append( 'ocker' )
         if found_colors:
             tomato['colors'] = found_colors
         return tomato

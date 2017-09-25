@@ -50,9 +50,9 @@ class TomatoGenerator(object):
         ## create tomato
         tomato = Tomato( name[0].strip() )
         if description:
-            tomato.setDescription( description[0] )
+            tomato.setDescription( " ".join( description ) )
         if image:
-            tomato.setImage( image[0] )
+            tomato.setImage( image[0].replace( '/images/stories/tomaten', 'images' ) )
         if link:
             tomato.setLink( link[0] )
             
