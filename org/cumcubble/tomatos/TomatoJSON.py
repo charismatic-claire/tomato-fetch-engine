@@ -44,3 +44,10 @@ class TomatoJSON(object):
     def fromListToFile( self, tomatoList ):
         with open( self.file, mode='w', encoding='utf-8' ) as tomatoFile:
             json.dump( tomatoList, tomatoFile, indent=2 )
+            
+    def saveImageUrlsToFile(self, image_urls ):
+        plain_strings = []
+        for image_url in image_urls:
+            plain_strings.append( image_url[0] )
+        with open( self.file, mode='w', encoding='utf-8' ) as imageFile:
+            json.dump( plain_strings, imageFile, indent=2 )
