@@ -42,7 +42,7 @@ class TomatoImagination(object):
             except:
                 print( 'Failed to download ' + url + '.' )
                 
-    def remove_missing_image_path( self, inFile, imageFolder, outFile ):
+    def remove_missing_image_path( self, inFile, outFile ):
         """
         Remove paths to missing images
         """
