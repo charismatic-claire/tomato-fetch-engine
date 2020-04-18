@@ -1,4 +1,4 @@
 *.pyc
 *__init__*
-.project
-.pydevproject
+/res/*.json
+/res/images/*.jpg

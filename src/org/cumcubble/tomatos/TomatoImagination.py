@@ -1,7 +1,7 @@
 import json
 import urllib.request
 from pathlib import Path
-from org.cumcubble.tomatos.TomatosFromURL import TomatosFromURL
+from src.org.cumcubble.tomatos.TomatosFromURL import TomatosFromURL
 from copy import deepcopy
 
 class TomatoImagination(object):
@@ -22,7 +22,7 @@ class TomatoImagination(object):
         ## init
         with open( inFile, mode='r', encoding='utf-8' ) as tomato_file:
             tomato_list = json.load( tomato_file )
-        prefix = 'http://www.birgit-kempe-tomaten.de/images/stories/tomaten/'
+        prefix = 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten/'
         
         ## get all urls
         urls = []
@@ -36,7 +36,7 @@ class TomatoImagination(object):
             
         ## download images
         for url in urls:
-            file_name = url.replace( 'http://www.birgit-kempe-tomaten.de/images/stories/tomaten', outFolder )
+            file_name = url.replace( 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten', outFolder )
             try:
                 urllib.request.urlretrieve( url, file_name )
             except:
@@ -70,7 +70,7 @@ class TomatoImagination(object):
         """
         ## get images urls
         tfu = TomatosFromURL()
-        image_urls = tfu.generate_list_of_image_urls( 'http://www.birgit-kempe-tomaten.de/index.php/de/tomaten-galerie' )
+        image_urls = tfu.generate_list_of_image_urls( 'https://www.birgit-kempe-tomaten.de/index.php/de/tomaten-galerie' )
         ## get tomatos without image
         tomatos_without_image = self.find_tomatos_without_image( inFile )
         ## match tomatos
@@ -147,7 +147,7 @@ class TomatoImagination(object):
                 ## find old tomato
                 old_tomato = next( tomato for tomato in old_tomato_list if tomato['name'] == tomato_name )
                 ## do work
-                file_name = image_url.replace( 'http://www.birgit-kempe-tomaten.de/images/stories/tomaten', 'images' )
+                file_name = image_url.replace( 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten', 'res/images' )
                 try:
                     ## fetch image
                     urllib.request.urlretrieve( image_url.replace( ' ', '%20' ), file_name )

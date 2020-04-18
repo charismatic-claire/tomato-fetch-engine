@@ -1,6 +1,6 @@
 from lxml import html
 import requests
-from org.cumcubble.tomatos.Tomato import Tomato
+from src.org.cumcubble.tomatos.Tomato import Tomato
 
 class TomatoGenerator(object):
     

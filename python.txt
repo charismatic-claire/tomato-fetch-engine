@@ -1,2 +1,0 @@
-## how to start the program in python
-PYTHONPATH=$(pwd) python3 org/cumcubble/tomatos/MainProgram.py > tomatos.log

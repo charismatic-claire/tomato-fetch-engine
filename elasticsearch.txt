@@ -1,2 +1,0 @@
-## to start
-elasticsearch -Enode.name=tomatos
