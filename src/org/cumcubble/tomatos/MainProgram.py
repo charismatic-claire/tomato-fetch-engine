@@ -41,23 +41,23 @@ def getNewTomatos( outFile ):
 if __name__ == '__main__':
     
     ## initial fetch
-    #print( "Initial fetch of Tomatos..." )
-    #getNewTomatos( outFile='res/tomatos01.json' )
-    #print( "Done\n" )
+    print( "Initial fetch of Tomatos..." )
+    getNewTomatos( outFile='res/tomatos01.json' )
+    print( "Done\n" )
     
     ## enrichment
-    #print( "Adding colors..." )
-    #enrichTomatos( category='colors' ,  inFile='res/tomatos01.json' , outFile='res/tomatos02.json' )
-    #print( "Done\n" )
-    #print( "Adding types..." )
-    #enrichTomatos( category='types' ,  inFile='res/tomatos02.json' , outFile='res/tomatos03.json' )
-    #print( "Done\n" )
+    print( "Adding colors..." )
+    enrichTomatos( category='colors' ,  inFile='res/tomatos01.json' , outFile='res/tomatos02.json' )
+    print( "Done\n" )
+    print( "Adding types..." )
+    enrichTomatos( category='types' ,  inFile='res/tomatos02.json' , outFile='res/tomatos03.json' )
+    print( "Done\n" )
     
     ## images
-    #print( "Fetching images..." )
-    #ti.getTomatoImages( inFile='res/tomatos03.json' , outFolder='res/images' )
-    #ti.remove_missing_image_path( inFile='res/tomatos03.json', outFile='res/tomatos04.json' )
-    #print( "Done\n" )
+    print( "Fetching images..." )
+    ti.get_tomato_images( inFile='res/tomatos03.json' , outFolder='res/images' )
+    ti.remove_missing_image_path( inFile='res/tomatos03.json', outFile='res/tomatos04.json' )
+    print( "Done\n" )
     print( "Adding missing images..." )
     ti.add_missing_tomato_images( inFile='res/tomatos04.json', outFile='res/tomatos05.json' )
     print( "Done\n" )

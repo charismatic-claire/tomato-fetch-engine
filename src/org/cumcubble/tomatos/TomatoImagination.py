@@ -15,7 +15,7 @@ class TomatoImagination(object):
         """
         self.io = io
     
-    def getTomatoImages( self, inFile, outFolder ):
+    def get_tomato_images( self, inFile, outFolder ):
         """
         Fetch the images from their path per tomato
         """
@@ -38,6 +38,7 @@ class TomatoImagination(object):
         for url in urls:
             file_name = url.replace( 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten', outFolder )
             try:
+                print('Downloading', url)
                 urllib.request.urlretrieve( url, file_name )
             except:
                 print( 'Failed to download ' + url + '.' )
@@ -53,7 +54,7 @@ class TomatoImagination(object):
         tomatoList2 = []
         for tomato in tomatoList:
             try:
-                image_file = Path( tomato['image'] )
+                image_file = Path( 'res/' + tomato['image'] )
                 if not image_file.is_file():
                     print( 'Deleting ' + tomato['image'] )
                     del tomato['image']
@@ -70,9 +71,10 @@ class TomatoImagination(object):
         """
         ## get images urls
         tfu = TomatosFromURL()
-        image_urls = tfu.generate_list_of_image_urls( 'https://www.birgit-kempe-tomaten.de/index.php/de/tomaten-galerie' )
+        image_urls = tfu.generate_list_of_image_urls( 'https://www.birgit-kempe-tomaten.de/de/tomaten-galerie.html' )
         ## get tomatos without image
         tomatos_without_image = self.find_tomatos_without_image( inFile )
+        print(tomatos_without_image)
         ## match tomatos
         tomato_matches = {}
         for tomato in tomatos_without_image:
@@ -147,10 +149,11 @@ class TomatoImagination(object):
                 ## find old tomato
                 old_tomato = next( tomato for tomato in old_tomato_list if tomato['name'] == tomato_name )
                 ## do work
-                file_name = image_url.replace( 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten', 'res/images' )
+                file_name = image_url.replace( 'https://www.birgit-kempe-tomaten.de/images/stories/tomaten', 'images' )
                 try:
+                    print('Downloading', image_url)
                     ## fetch image
-                    urllib.request.urlretrieve( image_url.replace( ' ', '%20' ), file_name )
+                    urllib.request.urlretrieve( image_url.replace( ' ', '%20' ), 'res/' + file_name )
                     ## create new tomato
                     new_tomato = deepcopy( old_tomato )
                     new_tomato['image'] = file_name

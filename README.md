@@ -1,8 +1,11 @@
-# About The App
-This is a web scraper written in Python. It access this website: (Birgit Kempe Tomaten)[https://www.birgit-kempe-tomaten.de/] and extracts all the data about the 600+ tomato varieties listed.
+# Tomato Fetch Engine
+This is a web scraper written in Python. It access this website: [Birgit Kempe Tomaten)](https://www.birgit-kempe-tomaten.de/) and extracts all the data about the 400+ tomato varieties listed.
 
-# How To Run Using Linux BASH
+## How to run using Linux BASH
 ```
 $ cd tomato-fetch-engine
-$ PYTHONPATH=$(pwd) python3 src/org/cumcubble/tomatos/MainProgram.py
+$ ./run.sh
 ```
+
+## What to do with the result
+Feed it into the [Tomato Search Engine](...)
