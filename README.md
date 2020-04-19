@@ -1,5 +1,7 @@
 # Tomato Fetch Engine
-This is a web scraper written in Python. It access this website: [Birgit Kempe Tomaten)](https://www.birgit-kempe-tomaten.de/) and extracts all the data about the 400+ tomato varieties listed.
+This is a web scraper written in Python. It access this website: [Birgit Kempe Tomaten)](https://www.birgit-kempe-tomaten.de/) and extracts all the data about the 400+ tomato varieties listed. See a screenshot of the website below:
+
+![Birgit Kempe Tomaten Galerie](img/bkt.jpg)
 
 ## How to run using Linux BASH
 ```
