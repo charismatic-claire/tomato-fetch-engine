@@ -8,4 +8,7 @@ $ ./run.sh
 ```
 
 ## What to do with the result
-Feed it into the [Tomato Search Engine](...)
+Feed the resulting `res.tar.gz` it into the [Tomato Search Engine](...)
+
+## License
+GPL-3.0-or-later

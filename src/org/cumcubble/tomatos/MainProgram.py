@@ -36,7 +36,6 @@ def getNewTomatos( outFile ):
     io.setFile( outFile )
     io.fromWebToFile( True )
     
-
 ## main program
 if __name__ == '__main__':
     
@@ -61,3 +60,4 @@ if __name__ == '__main__':
     print( "Adding missing images..." )
     ti.add_missing_tomato_images( inFile='res/tomatos04.json', outFile='res/tomatos05.json' )
     print( "Done\n" )
+    
